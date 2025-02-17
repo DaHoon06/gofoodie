@@ -8,11 +8,12 @@ export const button = style({
   display: "flex",
   alignItems: "center",
   gap: 24,
+  width: "100%",
+  padding: "0 2rem",
+  justifyContent: "center",
 });
 
 export const kakaoLogo = style({
   width: "auto",
   height: "36px",
-  paddingLeft: "28px",
-  paddingRight: "76px",
 });
