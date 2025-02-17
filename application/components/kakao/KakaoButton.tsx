@@ -4,6 +4,7 @@ import React from "react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import * as styles from "./KakaoButton.css";
+import { Typography } from "../common/typography";
 
 const KakaoButton = () => {
   const handleClickKakaoSignIn = async () => {
@@ -34,6 +35,9 @@ const KakaoButton = () => {
         height={40}
         alt="카카오 로그인 버튼"
       />
+      <Typography as={"span"} fontSize={16} fontWeight={700}>
+        카카오 로그인
+      </Typography>
     </button>
   );
 };

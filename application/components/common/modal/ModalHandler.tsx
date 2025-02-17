@@ -13,6 +13,7 @@ import { BottomSlideModal } from "./BottomSlide";
 import useModalStore, { ModalType } from "@/shared/store/modalStore";
 import * as styles from "./BottomSlide.css";
 import useModalHook from "@/shared/hooks/useModal";
+import { SigninModal } from "@/components/auth/modal";
 
 type Modal = PropsWithChildren;
 
@@ -74,7 +75,7 @@ export const ModalContainer = () => {
     <>
       <div id="modal" />
       <ModalHandler>
-        {type === ModalType.SIGN_ALERT && <div>ALERT</div>}
+        {type === ModalType.SIGN_ALERT && <SigninModal />}
       </ModalHandler>
     </>
   );
