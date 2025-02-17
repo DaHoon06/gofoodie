@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  frontend:
+    build:
+      context: "../../application"
+      dockerfile: "../docker/development/Dockerfile"
+    image: ${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}
+    container_name: ${DOCKER_APP_NAME}
+    ports:
+      - "3002:3000"

@@ -1,24 +1,23 @@
-'use client';
+"use client";
 
-import {AnimatePresence, motion,} from 'framer-motion';
-import React, {ReactElement} from 'react';
-import {ModalProps} from "./ModalHandler";
-import useModalHook from "@/hooks/useModalHook";
-import * as styles from './BottomSlide.css';
-
+import { AnimatePresence, motion } from "framer-motion";
+import React, { ReactElement } from "react";
+import { ModalProps } from "./ModalHandler";
+import useModalHook from "@/shared/hooks/useModal";
+import * as styles from "./BottomSlide.css";
 
 export const BottomSlideModal = (props: ModalProps): ReactElement => {
-  const {isOpen, children, ele} = props;
-  const {outerClickEvent} = useModalHook(ele);
+  const { isOpen, children, ele } = props;
+  const { outerClickEvent } = useModalHook(ele);
 
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.dialog
           className={styles.modalLayout}
-          key={'bottom-modal-key'}
+          key={"bottom-modal-key"}
           onClick={outerClickEvent}
-          initial={{opacity: 1}}
+          initial={{ opacity: 1 }}
           animate={{
             opacity: 1,
           }}
@@ -28,8 +27,8 @@ export const BottomSlideModal = (props: ModalProps): ReactElement => {
         >
           <motion.div
             className={styles.bottomSlideContainer}
-            initial={{opacity: 1, y: 700}}
-            transition={{ease: [0.17, 0.67, 0.83, 1]}}
+            initial={{ opacity: 1, y: 700 }}
+            transition={{ ease: [0.17, 0.67, 0.83, 1] }}
             animate={{
               opacity: 1,
               y: 0,

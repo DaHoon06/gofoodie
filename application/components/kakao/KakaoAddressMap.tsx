@@ -1,8 +1,8 @@
 "use client";
 
 import { ReactElement, useEffect, useRef, useState } from "react";
-import useFeedStore from "@/store/feedStore";
-import { AddressState } from "@/interfaces/feeds/feed.post";
+import useFeedStore from "@/shared/store/feedStore";
+import { AddressState } from "@/typings/interfaces/feeds/feedPost";
 import { Skeleton } from "@/components/common/skeleton/Skeleton";
 
 const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
@@ -157,7 +157,11 @@ export const KakaoAddressMap = (): ReactElement => {
       const scripts = document.head.getElementsByTagName("script");
       for (let i = 0; i < scripts.length; i++) {
         const script = scripts[i];
-        if (script.parentNode && script.src && script.src.includes("dapi.kakao.com")) {
+        if (
+          script.parentNode &&
+          script.src &&
+          script.src.includes("dapi.kakao.com")
+        ) {
           script.parentNode.removeChild(script);
         }
       }

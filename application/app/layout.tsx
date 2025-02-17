@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import '@/styles/reset.scss';
+import "@/styles/reset.scss";
 import React from "react";
-import {Layout} from "@/components/Layout";
-import AuthContext from "@/context/AuthContext";
-import MetaHead from "@/components/header/MetaHead";
-import AuthProvider from "@/providers/AuthProvider";
-import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
-import TanstackQueryProviders from "@/providers/TanstackQueryProviders";
+import { Layout } from "@/layouts";
+import AuthContext from "@/shared/context/AuthContext";
+import AuthProvider from "@/shared/providers/AuthProvider";
+import { AppProvider } from "./(app)";
 
 export const metadata: Metadata = {
   title: "배~고푸디? 배고플땐 고푸디 | go foodie",
   description: "배~고푸디? 배고플땐 고푸디",
-  keywords: '맛집, 레시피, 동네맛집, 맛, 맛집 리스트, 맛집 정보, 음식, 음식점, 데이트, 푸디, 고푸디, dahoon06, gofoodie, GoFoodie, go-foodie, goFoodie'
+  keywords:
+    "맛집, 레시피, 동네맛집, 맛, 맛집 리스트, 맛집 정보, 음식, 음식점, 데이트, 푸디, 고푸디, dahoon06, gofoodie, GoFoodie, go-foodie, goFoodie",
 };
 
 export default function RootLayout({
@@ -22,16 +21,13 @@ export default function RootLayout({
   return (
     <html lang="kr">
       <body>
-        <AuthContext>
-          <TanstackQueryProviders>
+        <AppProvider>
+          <AuthContext>
             <AuthProvider>
-              <Layout>
-                {children}
-              </Layout>
+              <Layout>{children}</Layout>
             </AuthProvider>
-            <ReactQueryDevtools initialIsOpen={false} />
-          </TanstackQueryProviders>
-        </AuthContext>
+          </AuthContext>
+        </AppProvider>
       </body>
     </html>
   );

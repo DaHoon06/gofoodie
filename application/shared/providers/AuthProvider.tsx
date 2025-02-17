@@ -1,6 +1,6 @@
 "use client";
 
-import useCookies from "@/hooks/useCookie";
+import useCookies from "@/shared/hooks/useCookie";
 import { useSession } from "next-auth/react";
 import { createContext, useContext, useEffect, useState } from "react";
 
