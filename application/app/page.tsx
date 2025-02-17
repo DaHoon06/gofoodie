@@ -1,15 +1,15 @@
-import { KakaoMap } from "@/components/kakao";
 import * as styles from "./page.css";
 import { FeedSkeleton } from "@/components/common/skeleton/FeedSkeleton";
 import { MyFeedSkeleton } from "@/components/common/skeleton/MyFeedSkeleton";
 import { HorizontalBar } from "@/components/navigation/HorizontalBar";
 import FlexBox from "@/components/common/boxes/FlexBox";
 import { AvatarCardSkeleton } from "@/components/common/skeleton/AvatarCardSkeleton";
+import { MapRenderer } from "@/components/map";
 
 export default async function Home() {
   return (
     <div className={styles.homeContainerLayout}>
-      <KakaoMap />
+      <MapRenderer />
       <HorizontalBar>
         <div>
           <FlexBox gap={12}>
