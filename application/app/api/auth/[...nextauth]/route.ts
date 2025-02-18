@@ -1,7 +1,9 @@
 import NextAuth from "next-auth/next";
 import KakaoProvider from "next-auth/providers/kakao";
 import { AuthOptions } from "next-auth";
-// import { userCheckApi } from "@apis/users/user.api";
+import { AuthRepository } from "@/modules/auth";
+
+const authRepository = new AuthRepository();
 
 const clientId = process.env.KAKAO_APP_KEY || "";
 const clientSecret = process.env.CLIENT_SECRET || "";
@@ -26,6 +28,9 @@ export const authOptions: AuthOptions = {
       if (user && Object.entries(user) && account) {
         const id = account.providerAccountId;
         console.log(user);
+        const result = await authRepository.userVerify(id);
+        console.log(result);
+
         // const { data } = await userCheckApi(user as User);
         // token.apiToken = data.data.token;
         // token.id = id;

@@ -2,10 +2,14 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import cookieParser from 'cookie-parser';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { ResponseInterceptor, TimeoutInterceptor } from './common/interceptors';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
   app.setGlobalPrefix('/api');
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -18,6 +22,9 @@ async function bootstrap() {
   );
 
   app.use(cookieParser());
+
+  app.useGlobalInterceptors(new TimeoutInterceptor());
+  app.useGlobalInterceptors(new ResponseInterceptor());
 
   app.enableCors({
     origin: true,

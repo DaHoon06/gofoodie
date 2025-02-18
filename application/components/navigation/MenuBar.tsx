@@ -16,8 +16,8 @@ import { useSession } from "next-auth/react";
 const link = {
   home: { label: "홈", to: "/" },
   timeline: { label: "소식", to: "/timeline" },
-  posts: { label: "글작성", to: "/feeds/post" },
-  myFeedLists: { label: "내가 작성한 게시글", to: "/feeds" },
+  posts: { label: "글작성", to: "/feed/post" },
+  myFeedLists: { label: "내가 작성한 게시글", to: "/feed" },
   management: { label: "마이", to: "/management" },
 };
 
@@ -43,8 +43,10 @@ export const MenuBar = (): ReactElement => {
       setIsOpen(true);
       return;
     }
-    setCurrentPath(to);
-    router.push(to);
+    // setCurrentPath(to);
+    // router.push(to);
+    setModalType(ModalType.SIGN_ALERT);
+    setIsOpen(true);
   };
 
   const active = (to: string) => {
