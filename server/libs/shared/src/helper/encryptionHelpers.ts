@@ -11,7 +11,7 @@ interface Options {
  * @param {string} encrypted 암호화된 값 전달
  * @param {Options} options algorithm과 key 필요
  */
-const decrypt = (encrypted: string, options: Options): string => {
+export const decrypt = (encrypted: string, options: Options): string => {
   const { algorithm = 'aes-256-ecb', key } = options;
 
   if (!key)
@@ -29,7 +29,7 @@ const decrypt = (encrypted: string, options: Options): string => {
  * @param {string} plain 암호화할 데이터 전달
  * @param {Options} options algorithm과 key 필요
  */
-const encrypt = (plain: string, options: Options): string => {
+export const encrypt = (plain: string, options: Options): string => {
   const { algorithm = 'aes-256-ecb', key } = options;
 
   if (!key)

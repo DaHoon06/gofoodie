@@ -1,9 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import { ResponseInterceptor } from '@app/shared/interceptor/response.interceptor';
+import { ResponseInterceptor } from '@app/shared/interceptors/response.interceptor';
 import cookieParser from 'cookie-parser';
-import { HttpServiceInterceptor } from '@app/shared/interceptor/http-service.interceptor';
+import { HttpServiceInterceptor } from '@app/shared/interceptors/http-service.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -20,7 +20,6 @@ async function bootstrap() {
   );
 
   app.use(cookieParser());
-
 
   app.enableCors({
     origin: true,
