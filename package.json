@@ -1,0 +1,19 @@
+{
+  "name": "gofoodie",
+  "version": "0.0.1",
+  "description": "고푸디 웹앱 서비스",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/funfun-taste/gofoodie-test.git"
+  },
+  "author": "dahoon06",
+  "license": "ISC",
+  "scripts": {
+    "release": "standard-version",
+    "dev:run": "concurrently \"cd application && npm run dev\" \"cd sever && npm run start:dev:api\""
+  },
+  "devDependencies": {
+    "standard-version": "^9.5.0",
+    "concurrently": "^9.1.0"
+  }
+}
