@@ -1,5 +1,3 @@
-import CustomHead from "../../components/common/meta/CustomHead";
+import { Header } from "./Header";
 
-export {
-  CustomHead
-}
+export { Header };
