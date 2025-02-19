@@ -2,17 +2,17 @@ export class Fetcher {
   baseURL: string;
   defaultHeaders: any;
 
-  constructor(
-    baseURL: string,
-    defaultHeaders: any = { "Content-Type": "application/json" }
-  ) {
+  constructor(baseURL: string, defaultHeaders: any = {}) {
     this.baseURL = baseURL;
     this.defaultHeaders = defaultHeaders;
   }
 
   async request<T>(endpoint: string, options: any = {}): Promise<T> {
     const url = `${this.baseURL}${endpoint}`;
-    const headers = { ...this.defaultHeaders, ...options.headers };
+    const headers = {
+      ...this.defaultHeaders,
+      ...options.headers,
+    };
 
     const config = {
       method: options.method || "GET",
@@ -24,6 +24,8 @@ export class Fetcher {
     if (config.method === "GET") {
       delete config.body;
     }
+
+    console.log(config);
 
     try {
       const response = await fetch(url, config);

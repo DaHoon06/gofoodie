@@ -25,7 +25,7 @@ export class UserEntity extends BaseEntity {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @Column({ type: String })
+  @Column({ type: String, default: '' })
   nickname: string;
 
   @Column({ type: String })
