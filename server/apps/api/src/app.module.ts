@@ -4,6 +4,7 @@ import { SharedModule } from '@app/shared';
 import { IS_PROD, IS_STAGING } from '@app/shared/config';
 import path from 'path';
 import { ConfigModule } from '@nestjs/config';
+import { UserModule } from './modules/user/user.module';
 
 const envFile = IS_PROD
   ? '.env.production'
@@ -23,6 +24,7 @@ const envFilePath = [path.resolve(__dirname, `../../../${envFile}`)];
       isGlobal: true,
       envFilePath,
     }),
+    UserModule,
   ],
   controllers: [],
   providers: [],

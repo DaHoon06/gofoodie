@@ -28,6 +28,9 @@ export class UserEntity extends BaseEntity {
   @Column({ type: String })
   nickname: string;
 
+  @Column({ type: String })
+  username: string;
+
   @Column({ type: String, default: '/images/profile.png' })
   profileImage: string;
 }
