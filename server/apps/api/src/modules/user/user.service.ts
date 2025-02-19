@@ -33,14 +33,14 @@ export class UserService {
 
     const token = this.authService.signJwt({
       uniqueId,
-      username: user.nickname,
+      username: user.username,
       profileImage: user.profileImage,
     });
 
     return {
       accessToken: token,
       uniqueId,
-      username: user.nickname,
+      username: user.username,
       profileImage: user.profileImage,
     };
   }
