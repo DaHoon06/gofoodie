@@ -8,6 +8,8 @@ import {
   ResponseInterceptor,
 } from '@app/shared/interceptors';
 
+const origin = ['http://localhost:3000'];
+
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
@@ -30,7 +32,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ResponseInterceptor());
 
   app.enableCors({
-    origin: true,
+    origin,
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     credentials: true,
   });

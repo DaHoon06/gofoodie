@@ -1,4 +1,4 @@
-import { FeedItem } from "@/typings/interfaces/feeds/feedPost";
+import { FeedItem } from "@/typings/feed/feedPost";
 import { create } from "zustand";
 import { combine, devtools } from "zustand/middleware";
 
@@ -23,6 +23,7 @@ const initialState: FeedInitialState = {
       x: "",
       y: "",
     },
+    mapRegister: false
   },
 };
 

@@ -12,6 +12,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { CiViewList } from "react-icons/ci";
 import useModalStore, { ModalType } from "@/shared/store/modalStore";
 import { useSession } from "next-auth/react";
+import { ModalHandler } from "../common/modal/ModalHandler";
+import { SigninModal } from "../auth/modal";
 
 const link = {
   home: { label: "홈", to: "/" },
@@ -25,7 +27,7 @@ export const MenuBar = (): ReactElement => {
   const router = useRouter();
   const pathname = usePathname();
   const [currentPath, setCurrentPath] = useState(pathname);
-  const { setIsOpen, setModalType } = useModalStore();
+  const { setIsOpen, setModalType, type } = useModalStore();
   const { data: session } = useSession();
 
   useEffect(() => {
@@ -38,15 +40,15 @@ export const MenuBar = (): ReactElement => {
       to === link.posts.to ||
       to === link.myFeedLists.to ||
       to === link.timeline.to;
+
     if (targetLink && !session) {
       setModalType(ModalType.SIGN_ALERT);
       setIsOpen(true);
       return;
     }
-    // setCurrentPath(to);
-    // router.push(to);
-    setModalType(ModalType.SIGN_ALERT);
-    setIsOpen(true);
+
+    setCurrentPath(to);
+    router.push(to);
   };
 
   const active = (to: string) => {
@@ -54,55 +56,60 @@ export const MenuBar = (): ReactElement => {
   };
 
   return (
-    <nav className={styles.navBarBottomLayout}>
-      <ul className={styles.navBarBottomContainer}>
-        <li className={styles.navBarLeftBox}>
-          <button
-            aria-label="home-button"
-            type={"button"}
-            className={styles.buttonItem}
-            onClick={() => onClickHandlerMenu(link.home.to)}
-          >
-            <RiHome5Line size={22} color={active(link.home.to)} />
-          </button>
-          <button
-            aria-label="pick-button"
-            type={"button"}
-            className={styles.buttonItem}
-            onClick={() => onClickHandlerMenu(link.myFeedLists.to)}
-          >
-            <CiViewList size={22} color={active(link.myFeedLists.to)} />
-          </button>
-        </li>
-        <li className={styles.navBarCenterBox}>
-          <button
-            type={"button"}
-            aria-label={"post_register_button"}
-            className={styles.navBarCenterButton}
-            onClick={() => onClickHandlerMenu(link.posts.to)}
-          >
-            <RiPencilFill size={22} color={"#fff"} />
-          </button>
-        </li>
-        <li className={styles.navBarRightBox}>
-          <button
-            aria-label="message-button"
-            type={"button"}
-            className={styles.buttonItem}
-            onClick={() => onClickHandlerMenu(link.timeline.to)}
-          >
-            <RiMessage3Line size={22} color={active(link.timeline.to)} />
-          </button>
-          <button
-            aria-label="management-button"
-            type={"button"}
-            className={styles.buttonItem}
-            onClick={() => onClickHandlerMenu(link.management.to)}
-          >
-            <RiUserLine size={22} color={active(link.management.to)} />
-          </button>
-        </li>
-      </ul>
-    </nav>
+    <>
+      <nav className={styles.navBarBottomLayout}>
+        <ul className={styles.navBarBottomContainer}>
+          <li className={styles.navBarLeftBox}>
+            <button
+              aria-label="home-button"
+              type={"button"}
+              className={styles.buttonItem}
+              onClick={() => onClickHandlerMenu(link.home.to)}
+            >
+              <RiHome5Line size={22} color={active(link.home.to)} />
+            </button>
+            <button
+              aria-label="pick-button"
+              type={"button"}
+              className={styles.buttonItem}
+              onClick={() => onClickHandlerMenu(link.myFeedLists.to)}
+            >
+              <CiViewList size={22} color={active(link.myFeedLists.to)} />
+            </button>
+          </li>
+          <li className={styles.navBarCenterBox}>
+            <button
+              type={"button"}
+              aria-label={"post_register_button"}
+              className={styles.navBarCenterButton}
+              onClick={() => onClickHandlerMenu(link.posts.to)}
+            >
+              <RiPencilFill size={22} color={"#fff"} />
+            </button>
+          </li>
+          <li className={styles.navBarRightBox}>
+            <button
+              aria-label="message-button"
+              type={"button"}
+              className={styles.buttonItem}
+              onClick={() => onClickHandlerMenu(link.timeline.to)}
+            >
+              <RiMessage3Line size={22} color={active(link.timeline.to)} />
+            </button>
+            <button
+              aria-label="management-button"
+              type={"button"}
+              className={styles.buttonItem}
+              onClick={() => onClickHandlerMenu(link.management.to)}
+            >
+              <RiUserLine size={22} color={active(link.management.to)} />
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <ModalHandler modalType={ModalType.SIGN_ALERT}>
+        {type === ModalType.SIGN_ALERT && <SigninModal />}
+      </ModalHandler>
+    </>
   );
 };

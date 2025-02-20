@@ -22,7 +22,12 @@ export type ModalProps = {
   ele: Element | any;
 } & Modal;
 
-export const ModalHandler: React.FC<Modal> = (props) => {
+interface ModalHandlerProps extends PropsWithChildren {
+  outerClick?: boolean;
+  modalType: ModalType;
+}
+
+export const ModalHandler: React.FC<ModalHandlerProps> = (props) => {
   const [showChild, setShowChild] = useState(false);
   const { children } = props;
   const { isOpen } = useModalStore();
@@ -74,9 +79,6 @@ export const ModalContainer = () => {
   return (
     <>
       <div id="modal" />
-      <ModalHandler>
-        {type === ModalType.SIGN_ALERT && <SigninModal />}
-      </ModalHandler>
     </>
   );
 };

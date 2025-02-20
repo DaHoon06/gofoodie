@@ -21,4 +21,5 @@ export interface FeedItem {
   title: string;
   category: string;
   address: AddressState;
+  mapRegister: boolean;
 }

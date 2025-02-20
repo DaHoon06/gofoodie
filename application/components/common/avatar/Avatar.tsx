@@ -9,11 +9,12 @@ interface AvatarProp {
 
 export const Avatar = React.memo((props: AvatarProp): ReactElement => {
   const { src, alt } = props;
+  const imageSource = src ? src : "/images/profile.png";
   return (
     <div className={styles.avatarLayout}>
       <Image
         className={styles.avatarImage}
-        src={src}
+        src={imageSource}
         alt={alt}
         width={40}
         height={40}

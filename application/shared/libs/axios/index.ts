@@ -7,7 +7,7 @@ import axios, {
 } from "axios";
 
 const baseURL = `${BASE_URL}/api`;
-console.log(baseURL);
+
 const instance: AxiosInstance = axios.create({
   baseURL,
   headers: {

@@ -32,14 +32,13 @@ export const authOptions: AuthOptions = {
           username: user.name || "",
         };
 
-        const result = await userRepository.signIn(body);
-        console.log(result);
+        const { data } = await userRepository.signIn(body);
 
-        // const { data } = await userCheckApi(user as User);
-        // token.apiToken = data.data.token;
-        // token.id = id;
-        // token.profile = data.data.profile;
+        token.apiToken = data.data.token;
+        token.id = data.data.uniqueId;
+        token.profile = data.data.profileImage;
       }
+
       return token;
     },
     async session({ token, session }) {

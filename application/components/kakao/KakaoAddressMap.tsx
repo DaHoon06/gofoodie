@@ -2,7 +2,7 @@
 
 import { ReactElement, useEffect, useRef, useState } from "react";
 import useFeedStore from "@/shared/store/feedStore";
-import { AddressState } from "@/typings/interfaces/feeds/feedPost";
+import { AddressState } from "@/typings/feed/feedPost";
 import { Skeleton } from "@/components/common/skeleton/Skeleton";
 
 const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
