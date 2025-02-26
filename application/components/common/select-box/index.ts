@@ -1,3 +1,3 @@
-import { BoarderSelectBox } from "./BoarderSelectBox";
+import { BorderSelectBox } from "./BorderSelectBox";
 
-export { BoarderSelectBox };
+export { BorderSelectBox };

@@ -40,6 +40,7 @@ export const locationItemBox = style({
   border: "1px solid #ededed",
   padding: "1em",
   margin: "10px auto",
+  display: "flex",
 });
 
 export const removeLocationButton = style({

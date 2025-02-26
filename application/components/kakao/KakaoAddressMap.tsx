@@ -3,14 +3,18 @@
 import { ReactElement, useEffect, useRef, useState } from "react";
 import useFeedStore from "@/shared/store/feedStore";
 import { AddressState } from "@/typings/feed/feedPost";
-import { Skeleton } from "@/components/common/skeleton/Skeleton";
+import { KAKAO_APP_KEY } from "@/shared/config";
 
-const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
+interface KakaoAddressMapProps {
+  currentLocation?: { lat: number; lng: number } | null;
+}
 
-export const KakaoAddressMap = (): ReactElement => {
+const KakaoAddressMap = ({
+  currentLocation,
+}: KakaoAddressMapProps): ReactElement => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const { setFeedItem, item } = useFeedStore();
-  const [csrLoading, setCsrLoading] = useState(false);
+  const [map, setMap] = useState<any>(null);
   const [address, setAddress] = useState<AddressState>({
     name: "",
     x: "",
@@ -18,11 +22,6 @@ export const KakaoAddressMap = (): ReactElement => {
     sido: "",
     sigungu: "",
   });
-  const [pending, setPending] = useState(true);
-
-  useEffect(() => {
-    setCsrLoading(true);
-  }, []);
 
   useEffect(() => {
     setFeedItem({
@@ -33,9 +32,8 @@ export const KakaoAddressMap = (): ReactElement => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setPending(true);
       const script = document.createElement("script");
-      script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoAppKey}&autoload=false&libraries=services`;
+      script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_APP_KEY}&autoload=false&libraries=services`;
       script.type = "text/javascript";
       script.async = true;
       document.head.appendChild(script);
@@ -48,20 +46,21 @@ export const KakaoAddressMap = (): ReactElement => {
           navigator.geolocation.getCurrentPosition(function (position) {
             const lat = position.coords.latitude, // 위도
               lon = position.coords.longitude; // 경도
+
             const options = {
               center: new kakao.maps.LatLng(lat, lon),
               level: 4,
             };
-            const map = new kakao.maps.Map(mapElement, options);
+
+            const newMap = new kakao.maps.Map(mapElement, options);
             const geocoder = new kakao.maps.services.Geocoder();
             const marker = new kakao.maps.Marker(); // 클릭한 위치를 표시할 마커입니다
             const infowindow = new kakao.maps.InfoWindow({ zindex: 1 }); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
 
-            searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-            setPending(false);
-
+            searchAddrFromCoords(newMap.getCenter(), displayCenterInfo);
+            setMap(newMap);
             kakao.maps.event.addListener(
-              map,
+              newMap,
               "click",
               function (mouseEvent: any) {
                 searchDetailAddrFromCoords(
@@ -90,11 +89,11 @@ export const KakaoAddressMap = (): ReactElement => {
 
                       // 마커를 클릭한 위치에 표시합니다
                       marker.setPosition(mouseEvent.latLng);
-                      marker.setMap(map);
+                      marker.setMap(newMap);
 
                       // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
                       infowindow.setContent(content);
-                      infowindow.open(map, marker);
+                      infowindow.open(newMap, marker);
                       const x = String(mouseEvent.latLng.getLng());
                       const y = String(mouseEvent.latLng.getLat());
                       const address = {
@@ -112,8 +111,8 @@ export const KakaoAddressMap = (): ReactElement => {
             );
 
             // 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
-            kakao.maps.event.addListener(map, "idle", function () {
-              searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+            kakao.maps.event.addListener(newMap, "idle", function () {
+              searchAddrFromCoords(newMap.getCenter(), displayCenterInfo);
             });
 
             function searchAddrFromCoords(coords: any, callback: any) {
@@ -166,19 +165,29 @@ export const KakaoAddressMap = (): ReactElement => {
         }
       }
     };
-  }, [mapContainer, csrLoading]);
+  }, [mapContainer]);
+
+  useEffect(() => {
+    if (map && currentLocation) {
+      const kakao: any = (window as any).kakao;
+      const newCenter = new kakao.maps.LatLng(
+        currentLocation.lat,
+        currentLocation.lng
+      );
+      map.setCenter(newCenter);
+    }
+  }, [currentLocation, map]);
 
   return (
-    <>
-      {<Skeleton isLoading={pending} />}
-      <div
-        id={"map"}
-        ref={mapContainer}
-        style={{
-          width: "100%",
-          height: 300,
-        }}
-      />
-    </>
+    <div
+      id={"map"}
+      ref={mapContainer}
+      style={{
+        width: "100%",
+        height: 300,
+      }}
+    />
   );
 };
+
+export default KakaoAddressMap;

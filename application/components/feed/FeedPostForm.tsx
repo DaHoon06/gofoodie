@@ -17,6 +17,7 @@ import { FiMapPin } from "react-icons/fi";
 import { ModalHandler } from "../common/modal/ModalHandler";
 import { MessageDialog } from "../common/dialog";
 import Image from "next/image";
+import { ShopLocation } from "./ShopLocation";
 
 const user = {
   nickname: "",
@@ -261,8 +262,7 @@ export const FeedPostForm = () => {
 
       {type === ModalType.REGISTER_SHOP && (
         <ModalHandler modalType={ModalType.REGISTER_SHOP}>
-          {/* <ShopLocation /> */}
-          <div>TESt</div>
+          <ShopLocation />
         </ModalHandler>
       )}
 

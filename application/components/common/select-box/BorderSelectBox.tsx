@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactElement, useEffect, useRef, useState } from "react";
-import * as styles from "./BoarderSelectBox.css";
+import * as styles from "./BorderSelectBox.css";
 import { Typography } from "../typography";
 
 export type Items = {
@@ -14,7 +14,7 @@ export interface SelectBoxProps {
   onChange: (value: string) => void;
 }
 
-export const BoarderSelectBox = (props: SelectBoxProps): ReactElement => {
+export const BorderSelectBox = (props: SelectBoxProps): ReactElement => {
   const { items, onChange } = props;
   const [currentValue, setCurrentValue] = useState(items[0].label);
   const [showOptions, setShowOptions] = useState(false);

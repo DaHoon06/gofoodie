@@ -1,4 +1,4 @@
-import { KakaoAddressMap } from "./KakaoAddressMap";
+import KakaoAddressMap from "./KakaoAddressMap";
 import KakaoButton from "./KakaoButton";
 import KakaoMap from "./KakaoMap";
 

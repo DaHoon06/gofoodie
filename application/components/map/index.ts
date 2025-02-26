@@ -1,3 +1,4 @@
-import { MapRenderer } from "./MapRenderer";
+import { CurrentLocationButton } from "./CurrentLocationButton";
+import { MapRenderer, AddressMapRenderer } from "./MapRenderer";
 
-export { MapRenderer };
+export { MapRenderer, AddressMapRenderer, CurrentLocationButton };
