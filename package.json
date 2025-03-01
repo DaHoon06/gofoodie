@@ -10,7 +10,7 @@
   "license": "ISC",
   "scripts": {
     "release": "standard-version",
-    "dev:run": "concurrently \"cd application && npm run dev\" \"cd sever && npm run start:dev:api\""
+    "dev:local": "concurrently \"cd application && npm run dev\" \"cd server && npm run start:dev:api\""
   },
   "devDependencies": {
     "standard-version": "^9.5.0",

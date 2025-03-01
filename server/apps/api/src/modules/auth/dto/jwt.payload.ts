@@ -2,7 +2,7 @@ import { IsString } from 'class-validator';
 
 export class JwtPayloadDto {
   @IsString()
-  uniqueId: string;
+  socialId: string;
 
   @IsString()
   username: string;

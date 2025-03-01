@@ -2,7 +2,7 @@ import { IsOptional, IsString } from 'class-validator';
 
 export class SigninDto {
   @IsString()
-  uniqueId: string;
+  socialId: string;
 
   @IsString()
   username: string;

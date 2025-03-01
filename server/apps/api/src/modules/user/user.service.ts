@@ -12,19 +12,19 @@ export class UserService {
   ) {}
 
   async createUser(body: CreateUserDto) {
-    const { username, uniqueId, profileImage } = body;
+    const { username, socialId, profileImage } = body;
     const profile = profileImage ? profileImage : null;
     const user = UserEntity.create({
       username,
-      uniqueId,
+      socialId,
       profileImage: profile,
     });
     return this.userRepository.createUser(user);
   }
 
   async findOneUser(body: SigninDto) {
-    const { uniqueId } = body;
-    let user = await this.findOneByUniqueId(uniqueId);
+    const { socialId } = body;
+    let user = await this.findOneBySocialId(socialId);
 
     // 사용자가 없으면 신규 회원 가입
     if (!user) {
@@ -32,20 +32,20 @@ export class UserService {
     }
 
     const token = this.authService.signJwt({
-      uniqueId,
+      socialId,
       username: user.username,
       profileImage: user.profileImage,
     });
 
     return {
       accessToken: token,
-      uniqueId,
+      socialId,
       username: user.username,
       profileImage: user.profileImage,
     };
   }
 
-  async findOneByUniqueId(uniqueId: string): Promise<UserEntity> {
-    return this.userRepository.findOneBy({ uniqueId });
+  async findOneBySocialId(socialId: string): Promise<UserEntity> {
+    return this.userRepository.findOneBy({ socialId });
   }
 }

@@ -11,12 +11,12 @@ export class AuthService {
   ) {}
 
   signJwt(payload: JwtPayloadDto): string {
-    const { uniqueId, username, profileImage } = payload;
+    const { socialId, username, profileImage } = payload;
     const secret =
       this.configService.get<string>('JWT_SECRET') || process.env.JWT_SECRET;
     const token = this.jwtService.sign(
       {
-        uniqueId,
+        socialId,
         username,
         profileImage,
       },
