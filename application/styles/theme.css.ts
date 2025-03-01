@@ -16,7 +16,7 @@ export const vars = createGlobalTheme(":root", {
     backgroundColor: "#f5f5f5",
   },
   width: {
-    max: "428",
+    max: "670px",
   },
 });
 

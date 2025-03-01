@@ -115,7 +115,7 @@ const KakaoMap = () => {
       ref={mapContainer}
       style={{
         width: "100%",
-        height: 300,
+        height: 400,
       }}
     />
   );

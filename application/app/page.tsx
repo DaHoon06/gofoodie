@@ -43,10 +43,6 @@ export default async function Home() {
         <div>
           <FlexBox flexDirection={"column"}>
             <FeedSkeleton isLoading={true} />
-            <FeedSkeleton isLoading={true} />
-            <FeedSkeleton isLoading={true} />
-            <FeedSkeleton isLoading={true} />
-            <FeedSkeleton isLoading={true} />
           </FlexBox>
         </div>
       </div>

@@ -24,7 +24,7 @@ const KakaoAddressMap = React.lazy(
 
 export const MapRenderer = (): React.ReactElement => {
   return (
-    <Suspense fallback={<Skeleton height={300} isLoading={true} />}>
+    <Suspense fallback={<Skeleton height={400} isLoading={true} />}>
       <KakaoMap />
     </Suspense>
   );
